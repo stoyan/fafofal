@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fafofal: Fabulous Font Fallbacks</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2'><circle cx='1' cy='1' r='1' fill='tomato'/></svg>"
+    />
+    <style id="webfontff"></style>
+    <style id="fallbackff"></style>
+    <style>
+      .webfont {
+        font-family: webfont !important;
+      }
+      .fallback {
+        font-family: fallback !important;
+      }
+    </style>
+    <style>
+      @import url('./src/style.css');
+    </style>
+  </head>
+  <body>
+    <h1>Fafofal <em>Fabulous Font Fallbacks</em></h1>
+    <h2>
+      <b style="color: blue; border-color: blue">1</b> Pick a webfont file
+    </h2>
+    <input type="file" id="upload" accept=".ttf,.otf,.woff,.woff2" />
+    <label for="upload">
+      Click here to choose a font file (.ttf, .otf, .woff, .woff2) or drag-drop
+      it anywhere
+    </label>
+    <p id="selected">Selected: none</p>
+
+    <h2>
+      <b style="color: red; border-color: red">2</b> Pick a local fallback
+    </h2>
+    <label
+      >Select or type a font name
+      <input list="fairly-locals" id="src" />
+    </label>
+    <a href="https://modernfontstacks.com/" target="_blank"
+      >font stacks helper</a
+    >
+    <datalist id="fairly-locals"></datalist>
+
+    <div id="resultsarea" style="display: none">
+      <!-- 3 -->
+      <h2>
+        <b style="color: purple; border-color: purple">3</b> (optional) Align
+        baselines
+      </h2>
+      <p>
+        Play with the <code>ascent-override</code> until baselines align
+        visually. Use the bottom of letters such as z, n or m as a guide to
+        where the baseline is. The <code>descent-override</code> will autoupdate
+        in the opposite direction so the height stays the same.
+      </p>
+
+      <p>Red is the fallback you're matching to the blue.</p>
+
+      <div style="display: grid">
+        <p style="position: relative">
+          <button
+            id="allright"
+            title="Click to scroll all the way to the right"
+          >
+            &gt;&gt;
+          </button>
+          <button id="allleft" title="Click to scroll all the way to the left">
+            &lt;&lt;
+          </button>
+        </p>
+        <div class="layered">
+          <div class="webfont">
+            The zebra jumps quickly over a fence, vexed by a lazy ox. Eden tries
+            to alter soft stone near it. Tall giants often need to rest, and
+            open roads invite no pause. Some long lines appear there. In bright
+            cold night, stars drift, and people watch them. A few near doors
+            step out. Much light finds land slowly, while men feel deep quiet.
+            Words run in ways, forward yet true. Look ahead, and things form
+            still, yet dreams stay hidden. Down the path, close skies come,
+            forming hard arcs. High above, quiet kites drift, fast on pure wind,
+            yanking joints.
+          </div>
+          <div class="fallback">
+            The zebra jumps quickly over a fence, vexed by a lazy ox. Eden tries
+            to alter soft stone near it. Tall giants often need to rest, and
+            open roads invite no pause. Some long lines appear there. In bright
+            cold night, stars drift, and people watch them. A few near doors
+            step out. Much light finds land slowly, while men feel deep quiet.
+            Words run in ways, forward yet true. Look ahead, and things form
+            still, yet dreams stay hidden. Down the path, close skies come,
+            forming hard arcs. High above, quiet kites drift, fast on pure wind,
+            yanking joints.
+          </div>
+        </div>
+      </div>
+      <p>
+        <code
+          >ascent-override:
+          <input
+            style="width: 5em"
+            type="number"
+            id="ascent-tweak"
+            step="0.1"
+            value=""
+          />%</code
+        >
+        you can use up/down arrows too
+      </p>
+
+      <!-- 4 -->
+      <h2><b style="color: green; border-color: green">4</b> Result</h2>
+      <pre id="result-css"></pre>
+
+      <!-- 5 -->
+      <h2>
+        <b style="color: darkorange; border-color: darkorange">5</b> Test area
+      </h2>
+      <button id="overlap">Toggle overlap</button>
+      <button id="layoutshift">Toggle layout shifts</button>
+
+      <table style="width: 100%" class="test-table">
+        <tbody>
+          <tr valign="top">
+            <td id="test-webfont" style="width: 50%">
+              <div style="visibility: visible">
+                <p>
+                  This is the test area where you can see the text formatted by
+                  the custom font and the fallback and comapre the two. This
+                  area also has a double purpose: to describe the tool, a
+                  documentation of sorts.
+                </p>
+                <p>
+                  On the left is the custom font and on the right is the
+                  fallback.
+                </p>
+                <p>
+                  You can overlap the two texts, in which case the fallback is
+                  red and the custom font is black.
+                </p>
+                <h3>Before we begin</h3>
+                <p>
+                  There are a few articles with more information about the font
+                  fallback technique:
+                </p>
+                <ul>
+                  <li>
+                    <a href="https://developer.chrome.com/blog/font-fallbacks/"
+                      >Katie's on the Chrome blog</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://web.dev/articles/css-size-adjust"
+                      >Adam's on web.dev</a
+                    >
+                  </li>
+                </ul>
+                <h3>Prior tools</h3>
+                <p>
+                  This tool build upon and draws inspiration from existing
+                  tools, namely:
+                </p>
+                <ul>
+                  <li>
+                    <a href="https://meowni.ca/font-style-matcher/">Monica's</a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.industrialempathy.com/perfect-ish-font-fallback/"
+                      >Malte's</a
+                    >
+                    and
+                    <a
+                      href="https://deploy-preview-15--upbeat-shirley-608546.netlify.app/perfect-ish-font-fallback/"
+                      >a newer version</a
+                    >
+                  </li>
+                </ul>
+                <p>
+                  Other tools that are not necessarily about fallbacks but are
+                  good to know:
+                </p>
+                <ul>
+                  <li><a href="https://fontdrop.info/">FontDrop.info</a></li>
+                  <li>
+                    <a href="https://wakamaifondue.com/">Wakamaifondue.com</a>
+                  </li>
+                </ul>
+                <p>
+                  Now that you know about wakamaifondue (what can my font do)
+                  you can probably tell where the inspiration for this tool's
+                  name came from. Fafofal - short for <b>Fa</b>bulous
+                  <b>Fo</b>nt <b>Fal</b>lbacks and sounding a bit like
+                  <em>falafel</em>.
+                </p>
+                <h3>What tech powers this tool?</h3>
+                <p>
+                  Other than misc hackery and tweakery, the external libs used
+                  are:
+                </p>
+                <ul>
+                  <li>
+                    <a href="https://github.com/opentypejs/opentype.js"
+                      >opentype.js</a
+                    >
+                    to read the font files' metadata
+                  </li>
+                  <li>
+                    <a href="https://github.com/fontello/wawoff2">wawoff2</a> to
+                    decompress WOFF2s
+                  </li>
+                </ul>
+                <p>
+                  Oh, and everything is local in the browser, your custom fonts
+                  are not uploaded anywhere.
+                </p>
+              </div>
+            </td>
+            <td id="test-fallback" style="width: 50%"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+    <script defer src="./assets/decompress_binding.js"></script>
+  </body>
+</html>
