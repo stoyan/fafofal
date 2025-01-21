@@ -31,7 +31,6 @@ const state: State = {
 };
 
 function renderResults() {
-  console.log(state);
   const yeygo = state.fontSrc && state.localSrc;
   if (!yeygo) {
     return;
@@ -163,7 +162,7 @@ async function adjustFallbackAscent() {
     }
     // todo: figure out Firefox
 
-    if (maxIterations % 200) {
+    if (maxIterations % 300) {
       // a bit of drama aka animation
       await new Promise((resolve) => requestAnimationFrame(resolve));
     }
@@ -289,6 +288,20 @@ document.getElementById('allleft')?.addEventListener('click', () => {
     behavior: 'smooth',
   });
 });
+
+document.getElementById('bold')?.addEventListener('click', ({target}) => {
+  handleArea51Style(target as HTMLElement, 'bold');
+});
+document.getElementById('italic')?.addEventListener('click', ({target}) => {
+  handleArea51Style(target as HTMLElement, 'italic');
+});
+
+function handleArea51Style(button: HTMLElement, what: 'bold' | 'italic') {
+  button.classList.toggle('active');
+  const prop = what === 'bold' ? 'fontWeight' : 'fontStyle';
+  (document.getElementById('area51') as HTMLElement).style[prop] =
+    button.classList.contains('active') ? what : 'normal';
+}
 
 document.getElementById('src')?.addEventListener('change', (e: Event) => {
   const inp = e.target as HTMLInputElement;

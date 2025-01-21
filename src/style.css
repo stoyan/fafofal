@@ -10,14 +10,14 @@ input {
 
 button {
   background-color: #007bff;
+  border: 1px solid #0068ff;
   color: white;
-  border: none;
   padding: 5px 10px;
   cursor: pointer;
   font-size: 0.9rem;
 }
 button:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 code,
 pre {
@@ -129,4 +129,27 @@ h2 b {
 }
 #test-fallback {
   font-family: fallback;
+}
+
+.style-tweaks {
+  background: lightgrey;
+  color: #111;
+  border: 1px solid darkgrey;
+}
+
+.style-tweaks.active {
+  background: lightsalmon;
+  border-color: darksalmon;
+}
+
+#bold {
+  font-weight: bold;
+}
+#italic {
+  font-style: italic;
+}
+#allright,
+#allleft,
+.style-tweaks {
+  font-family: ui-monospace, monospace;
 }
