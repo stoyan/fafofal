@@ -153,3 +153,25 @@ h2 b {
 .style-tweaks {
   font-family: ui-monospace, monospace;
 }
+
+/* "logo" */
+.circle {
+  width: 111px;
+  height: 111px;
+  background-color: transparent; /* Outer circle's background */
+  border: 1px solid #222; /* Outer circle's border */
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.circle > * {
+  width: 90%;
+  height: 90%;
+  background-color: #222; /* Inner circle's background */
+  color: #eee;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
