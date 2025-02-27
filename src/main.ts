@@ -146,9 +146,10 @@ async function adjustFallbackAscent() {
     return element.getBoundingClientRect().height;
   }
 
+  const webfontHeight = Math.round(getHeight(webfontDiv));
+  
   while (maxIterations-- > 0) {
-    const webfontHeight = getHeight(webfontDiv);
-    const fallbackHeight = getHeight(fallbackDiv);
+    const fallbackHeight = Math.round(getHeight(fallbackDiv));
     if (webfontHeight === fallbackHeight) {
       console.log(`Matching ascent-override found: ${ascentOverride}%`);
       state.fontMeta['ascent-override'] = ascentOverride;
