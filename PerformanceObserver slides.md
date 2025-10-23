@@ -24,7 +24,7 @@ font-family: CustomFont,
 
 * Monica Dinculescu's [Font Style Matcher](https://meowni.ca/font-style-matcher/)
 * Targeting elements, not fonts
-* Needs a class like `.font-is-loaded`
+* Needs a class like `.font-is-loaded` otherwise tweaking both
 * And an update to every type of text
   (e.g. different `line-height`s)
 
@@ -32,7 +32,7 @@ font-family: CustomFont,
 
 # New School
 
-* Font fallback not a text/element 
+* Font fallback, not a text/element 
 
 ```css
 @font-face {
@@ -96,7 +96,7 @@ font-family: CustomFont,
 
 * Even Arial is not guaranteed
 * [modernfontstacks.com](https://modernfontstacks.com/)
-* Pick more that one!
+* Pick more that one!💡
 
 ```css
 font-family: Custom Font, MacFallback, WindowsFallback...
@@ -130,6 +130,7 @@ font-family: Custom Font, MacFallback, WindowsFallback...
 * Safari: only `size-adjust`
 * Only as perfect as the measured text
 * Not all fonts available to `local()`
+* Using the tool on the target OS 
 
 <br><br><br><br><br><br><br><br><br>
 
