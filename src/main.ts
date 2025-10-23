@@ -202,13 +202,18 @@ function getCSSResult(): ResultCSS {
   return res;
 }
 
-function updateCSSResult() {
+function getCSSFontFaceBlock() {
   const css = getCSSResult();
   let cssString = '@font-face {\n';
   Object.entries(css).forEach(([key, value]) => {
     cssString += `  ${key}: ${value};\n`;
   });
   cssString += '}';
+  return cssString;
+}
+
+function updateCSSResult() {
+  const cssString = getCSSFontFaceBlock();
   (document.getElementById('result-css') as HTMLPreElement).textContent =
     cssString;
 
@@ -327,6 +332,21 @@ document
       updateCSSResult();
     }
   });
+
+document.getElementById('copy')?.addEventListener('click', () => {
+  const cssString = getCSSFontFaceBlock();
+  navigator.clipboard.writeText(cssString);
+
+  // Show a feedback message to make it clear that something happened
+  const feedback = document.getElementById('copy-feedback');
+  if (!feedback) {
+    return;
+  }
+  feedback.textContent = 'Copied!';
+  setTimeout(() => {
+    feedback.textContent = '';
+  }, 5000);
+});
 
 document.getElementById('overlap')?.addEventListener('click', () => {
   const ele = document.querySelector('#test-fallback div') as HTMLDivElement;
