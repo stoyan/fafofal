@@ -137,6 +137,7 @@ function measureSizeAdjust(): number {
 async function adjustFallbackAscent() {
   const webfontDiv = document.querySelector('.webfont') as HTMLDivElement;
   const fallbackDiv = document.querySelector('.fallback') as HTMLDivElement;
+  const fallbackStyle = document.getElementById('fallbackff') as HTMLStyleElement;
 
   let ascentOverride = state.fontMeta['ascent-override'] ?? 100;
   const step = 0.1;
@@ -159,8 +160,15 @@ async function adjustFallbackAscent() {
     if ('ascentOverride' in style) {
       // Chrome
       style.ascentOverride = ascentOverride + '%';
+    } else {
+      // Firefox has no JS API to update a CSSFontFaceRule, so we update the
+      // text content of the `<style>` element manually instead
+      const currentCSS = fallbackStyle.textContent ?? getCSSFontFaceBlock();
+      fallbackStyle.textContent = currentCSS.replace(
+        /ascent-override: [^%]+%/,
+        `ascent-override: ${ascentOverride}%`,
+      );
     }
-    // todo: figure out Firefox
 
     if (maxIterations % 300) {
       // a bit of drama aka animation
@@ -202,13 +210,18 @@ function getCSSResult(): ResultCSS {
   return res;
 }
 
-function updateCSSResult() {
+function getCSSFontFaceBlock() {
   const css = getCSSResult();
   let cssString = '@font-face {\n';
   Object.entries(css).forEach(([key, value]) => {
     cssString += `  ${key}: ${value};\n`;
   });
   cssString += '}';
+  return cssString;
+}
+
+function updateCSSResult() {
+  const cssString = getCSSFontFaceBlock();
   (document.getElementById('result-css') as HTMLPreElement).textContent =
     cssString;
 
